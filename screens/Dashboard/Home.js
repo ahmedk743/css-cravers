@@ -17,6 +17,12 @@ import {
   dummyData,
 } from '../../constants';
 
+const Section = ({containerStyle, title, onPress, children}) => {
+  return (
+    <View></View>
+  )
+}
+
 const Home = () => {
   const renderHeader = () => {
     return (
@@ -121,6 +127,12 @@ const Home = () => {
     );
   };
 
+  const renderCategories = () => {
+    return(
+      <Section></Section>
+    )
+  }
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
       {/*renderHeader()*/}
@@ -137,6 +149,9 @@ const Home = () => {
         {renderCourses()}
 
         <LineDivider lineStyle={{ marginVertical: SIZES.padding }} />
+
+        {/* Categories */}
+        {renderCategories()}
       </ScrollView>
     </View>
   );
