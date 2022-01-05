@@ -1,13 +1,13 @@
-import React from 'react';
-import { View, Text, ScrollView, ImageBackground, Image } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import React from "react";
+import { View, Text, ScrollView, ImageBackground, Image } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 
 import {
   IconButton,
   TextButton,
   VerticalCourseCard,
   LineDivider,
-} from '../../components';
+} from "../../components";
 import {
   COLORS,
   SIZES,
@@ -15,25 +15,55 @@ import {
   icons,
   images,
   dummyData,
-} from '../../constants';
+} from "../../constants";
 
-const Section = ({containerStyle, title, onPress, children}) => {
+const Section = ({ containerStyle, title, onPress, children }) => {
   return (
-    <View></View>
-  )
-}
+    <View
+      style={{
+        ...containerStyle,
+      }}
+    >
+      <View
+        style={{
+          flexDirection: "row",
+          paddingHorizontal: SIZES.padding,
+        }}
+      >
+        <Text
+          style={{
+            flex: 1,
+            ...FONTS.h2,
+          }}
+        >
+          {title}
+        </Text>
+        <TextButton
+          style={{
+            width: 80,
+            borderRadius: 30,
+            backgroundColor: COLORS.primary,
+          }}
+          label="See All"
+          onPress={onPress}
+        />
+      </View>
+    </View>
+  );
+};
 
 const Home = () => {
   const renderHeader = () => {
     return (
       <View
         style={{
-          flexDirection: 'row',
+          flexDirection: "row",
           marginTop: 40,
           marginBottom: 10,
           paddingHorizontal: SIZES.padding,
-          alignItems: 'center',
-        }}>
+          alignItems: "center",
+        }}
+      >
         <View style={{ flex: 1 }}>
           <Text style={{ ...FONTS.h1 }}>Salam, Cravers!</Text>
           <Text style={{ color: COLORS.gray50, ...FONTS.body3 }}>
@@ -56,14 +86,15 @@ const Home = () => {
       <ImageBackground
         source={images.featured_bg_image}
         style={{
-          alignItems: 'flex-start',
+          alignItems: "flex-start",
           marginTop: SIZES.padding,
           marginHorizontal: SIZES.padding,
           padding: 15,
         }}
         imageStyle={{
           borderRadius: SIZES.radius,
-        }}>
+        }}
+      >
         <View>
           <Text style={{ color: COLORS.white, ...FONTS.body2 }}>HOW TO</Text>
           <Text style={{ color: COLORS.white, ...FONTS.h2 }}>
@@ -74,14 +105,15 @@ const Home = () => {
               color: COLORS.white,
               ...FONTS.body4,
               marginTop: SIZES.radius,
-            }}>
+            }}
+          >
             By Waqas Ahmed
           </Text>
         </View>
 
         <Image
           source={images.start_learning}
-          style={{ width: '100%', height: 110, marginTop: SIZES.padding }}
+          style={{ width: "100%", height: 110, marginTop: SIZES.padding }}
         />
 
         <TextButton
@@ -128,10 +160,22 @@ const Home = () => {
   };
 
   const renderCategories = () => {
-    return(
-      <Section></Section>
-    )
-  }
+    return (
+      <Section title="Categories">
+        <FlatList
+          horizontal
+          data={dummyData.categories}
+          listKey="Categories"
+          keyExtractor={(item) => `Category-${item.i}`}
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={{
+            marginTop: SIZES.radius,
+          }}
+          renderItem={({ item, index }) => <Category />}
+        />
+      </Section>
+    );
+  };
 
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.white }}>
@@ -141,7 +185,8 @@ const Home = () => {
         contentContainerStyle={{
           paddingBottom: 150,
         }}
-        showsVerticalScrollIndicator={false}>
+        showsVerticalScrollIndicator={false}
+      >
         {/*Start Learning */}
         {/*renderStartLearning()*/}
 
